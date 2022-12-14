@@ -1,11 +1,12 @@
 const User = require("../models/userModel");
 const passport = require("passport");
+const errMsg = require("../commons/errorMessages");
 
 const createUser = (req, res) => {
   User.findOne({ emailAddress: req.body.emailAddress }, async (err, user) => {
     try {
       if (user) {
-        return res.status(309).send("User already in the system.");
+        return res.status(309).send(errMsg.userExist);
       }
 
       if (!user) {
@@ -14,7 +15,7 @@ const createUser = (req, res) => {
 
         req.login(newUser, (err) => {
           if (err) res.status(309).send(err);
-          return res.status(200).send({ success: newUser });
+          return res.status(200).send(newUser);
         });
       }
     } catch (error) {
@@ -29,12 +30,12 @@ const loginUser = (req, res) => {
 
     if (info) {
       if (info.message === "Missing credentials") {
-        return res.status(401).send("Missing Credientials");
+        return res.status(401).send(errMsg.missingCredential);
       }
     }
 
     if (!user) {
-      return res.status(401).send("Authorized users");
+      return res.status(401).send(errMsg.unauthorizedUser);
     }
 
     req.logIn(user, (err) => {
@@ -68,7 +69,7 @@ const logoutUser = async (req, res) => {
     if (err) return res.send(err);
 
     delete req.session;
-    res.send("Noo please come back");
+    res.send(errMsg.logoutMessage);
   });
 };
 
