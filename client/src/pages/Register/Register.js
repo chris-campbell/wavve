@@ -1,7 +1,7 @@
 import { Imports } from ".";
 
 const Register = () => {
-  const { useState, useAuth, axiosClient } = Imports;
+  const { useState, useAuth, axiosClient, useNavigate } = Imports;
 
   const initialFormState = {
     firstName: "",
@@ -12,6 +12,7 @@ const Register = () => {
 
   const [formState, setFormState] = useState(initialFormState);
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
 
   const createUser = async (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const Register = () => {
 
       if (data) {
         setAuth(data);
+        navigate("/dashboard");
         console.log({ data });
       }
     } catch (error) {

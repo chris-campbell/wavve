@@ -1,6 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("./models/userModel");
+const errMsg = require("./commons/errorMessages");
 
 const initialize = (passport) => {
   const authenticateUser = async (emailAddress, password, done) => {
@@ -8,7 +9,7 @@ const initialize = (passport) => {
 
     if (!user) {
       return done(null, false, {
-        message: "No account with provided email. Would you like to ",
+        message: errMsg.noAccountFound,
       });
     }
 
@@ -17,7 +18,7 @@ const initialize = (passport) => {
         return done(null, user);
       } else {
         return done(null, false, {
-          message: "Oops, that's not the right password. Please try again!",
+          message: errMsg.incorrectPassword,
         });
       }
     } catch (error) {
