@@ -1,6 +1,6 @@
-import React from "react";
+import { Imports } from ".";
 
-const CoinRow = ({ name, market_data, image, index }) => {
+const CoinRow = ({ id, name, market_data, image, index }) => {
   const {
     current_price,
     price_change_percentage_1h_in_currency,
@@ -10,14 +10,18 @@ const CoinRow = ({ name, market_data, image, index }) => {
     market_cap,
   } = market_data;
 
+  const { Link } = Imports;
+
   return (
     <tr>
       <td>{index}</td>
       <td>
-        <span>
-          <img src={image.thumb} />
-          {name}
-        </span>
+        <Link to={`/coins/${id}`}>
+          <span>
+            <img src={image.thumb} />
+            {name}
+          </span>
+        </Link>
       </td>
       <td>{currency(current_price.usd, "USD")}</td>
       <td>{price_change_percentage_1h_in_currency.usd}</td>

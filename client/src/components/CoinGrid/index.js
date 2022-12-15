@@ -1,8 +1,10 @@
 import CoinGrid from "./CoinGrid";
-import CoinRow from "../CoinRow";
+import CoinTableHeader from "../CoinTableHeader";
+import TableBody from "../TableBody";
 
 export const Imports = {
-  CoinRow,
+  CoinTableHeader,
+  TableBody,
 };
 
 export default CoinGrid;
