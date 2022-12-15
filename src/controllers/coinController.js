@@ -15,6 +15,21 @@ const fetchCoins = async (req, res) => {
   }
 };
 
+const fetchCoin = async () => {
+  try {
+    const coin = await CoinGeckoClient.coins.fetch("bitcoin");
+
+    if (!coin) {
+      res.status(309).send("Unable to locate coin in our system.");
+    }
+
+    res.send(coin);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
   fetchCoins,
+  fetchCoin,
 };
