@@ -5,6 +5,7 @@ const errMsg = {
   missingCredential: "Missing Credentials",
   unauthorizedUser: "Unauthorized users",
   logoutMessage: "No! Please come back.",
+  noCoinsFound: "Unable to return coins.",
 };
 
 module.exports = errMsg;

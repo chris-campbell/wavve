@@ -1,13 +1,24 @@
+import { useEffect, useState } from "react";
 import { Imports } from ".";
 
 const Dashboard = () => {
-  const { apiClient } = Imports;
+  const { apiClient, CoinGrid } = Imports;
 
-  return (
-    <div>
-      <div>Dashboard Components</div>
-    </div>
-  );
+  const [coins, setCoins] = useState([]);
+
+  useEffect(() => {
+    const fetchCoins = async () => {
+      const { data } = await apiClient.get("/fetchCoins", {
+        withCredentials: true,
+      });
+
+      setCoins(data.data);
+    };
+
+    fetchCoins();
+  }, []);
+
+  return <CoinGrid coins={coins} />;
 };
 
 export default Dashboard;

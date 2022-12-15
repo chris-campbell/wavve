@@ -31,8 +31,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const userRoutes = require("./src/routes/userRouter.js");
+const coinRoutes = require("./src/routes/coinRoutes.js");
 
 app.use("/", userRoutes);
+app.use("/", coinRoutes);
 
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
